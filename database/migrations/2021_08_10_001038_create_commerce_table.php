@@ -13,12 +13,13 @@ class CreateCommerceTable extends Migration
      */
     public function up()
     {
-        Schema::create('commerce', function (Blueprint $table) {
+        Schema::create('vendor', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('name');
-            $table->boolean('status');
-            $table->timestamps();
+            $table->string('nit');
+            $table->boolean('status')->default(1);
+            $table->timestamps()->useCurrent();
         });
     }
 
@@ -29,6 +30,6 @@ class CreateCommerceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commerce');
+        Schema::dropIfExists('vendor');
     }
 }

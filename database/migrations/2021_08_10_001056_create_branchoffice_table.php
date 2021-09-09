@@ -17,13 +17,16 @@ class CreateBranchofficeTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('name');
-            $table->multiLineString('address');
-            $table->boolean('status');
-            $table->foreignId('commerce_id');
+            $table->boolean('addnit');
+            $table->string('nit');
+            $table->unsignedInteger('zone',2);
+            $table->string('address')->nullable($value = true);
+            $table->boolean('status')->default(1);
+            $table->foreignId('vendor_id');
             $table->foreignId('town_id');
-            $table->foreign('commerce_id')->references('id')->on('commerce');
+            $table->foreign('vendor_id')->references('id')->on('vendor');
             $table->foreign('town_id')->references('id')->on('town');
-            $table->timestamps();
+            $table->timestamps()->useCurrent();
         });
     }
 

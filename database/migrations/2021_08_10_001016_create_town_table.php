@@ -17,10 +17,10 @@ class CreateTownTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('name');
-            $table->boolean('status');
+            $table->boolean('status')->default(1);
             $table->foreignId('department_id');
             $table->foreign('department_id')->references('id')->on('department');
-            $table->timestamps();
+            $table->timestamps()->useCurrent();
         });
     }
 

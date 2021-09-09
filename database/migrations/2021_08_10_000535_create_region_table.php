@@ -17,8 +17,8 @@ class CreateRegionTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('name');
-            $table->boolean('status');
-            $table->timestamps();
+            $table->boolean('status')->default(1);
+            $table->timestamps()->useCurrent();
         });
     }
 

@@ -17,10 +17,10 @@ class CreateDepartmentTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('name');
-            $table->boolean('status');
+            $table->boolean('status')->default(1);
             $table->foreignId('region_id');
             $table->foreign('region_id')->references('id')->on('region');
-            $table->timestamps();
+            $table->timestamps()->useCurrent();
         });
     }
 
