@@ -30,7 +30,7 @@ class CreateComplaintTable extends Migration
             $table->foreign('branchoffice_id')->references('id')->on('branchoffice');
             $table->foreign('department_id')->references('id')->on('department');
             $table->foreign('town_id')->references('id')->on('town');
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
         });
     }
 

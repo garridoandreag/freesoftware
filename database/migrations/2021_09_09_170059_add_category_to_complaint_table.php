@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegionTable extends Migration
+class AddCategoryToComplaintTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateRegionTable extends Migration
      */
     public function up()
     {
-        Schema::create('region', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->id();
-            $table->string('name');
-            $table->boolean('status')->default(1);
-            $table->timestamps();
+        Schema::table('complaint', function (Blueprint $table) {
+            $table->foreignId('category_id');
+            $table->foreign('category_id')->references('id')->on('category');
         });
     }
 
@@ -29,6 +26,8 @@ class CreateRegionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('region');
+        Schema::table('complaint', function (Blueprint $table) {
+            //
+        });
     }
 }

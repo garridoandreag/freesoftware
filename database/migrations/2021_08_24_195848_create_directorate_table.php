@@ -19,7 +19,7 @@ class CreateDirectorateTable extends Migration
             $table->string('name');
             $table->string('logo');
             $table->boolean('status')->default(1);
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
         });
     }
 

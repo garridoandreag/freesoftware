@@ -20,7 +20,7 @@ class CreateTownTable extends Migration
             $table->boolean('status')->default(1);
             $table->foreignId('department_id');
             $table->foreign('department_id')->references('id')->on('department');
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
         });
     }
 

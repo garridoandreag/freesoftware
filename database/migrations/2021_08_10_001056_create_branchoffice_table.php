@@ -19,14 +19,14 @@ class CreateBranchofficeTable extends Migration
             $table->string('name');
             $table->boolean('addnit');
             $table->string('nit');
-            $table->unsignedInteger('zone',2);
+            $table->integer('zone')->unsigned();
             $table->string('address')->nullable($value = true);
             $table->boolean('status')->default(1);
             $table->foreignId('vendor_id');
             $table->foreignId('town_id');
             $table->foreign('vendor_id')->references('id')->on('vendor');
             $table->foreign('town_id')->references('id')->on('town');
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
         });
     }
 

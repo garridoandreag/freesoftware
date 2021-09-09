@@ -20,7 +20,7 @@ class CreateDepartmentTable extends Migration
             $table->boolean('status')->default(1);
             $table->foreignId('region_id');
             $table->foreign('region_id')->references('id')->on('region');
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
         });
     }
 

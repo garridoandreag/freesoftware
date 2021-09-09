@@ -14,8 +14,8 @@ class AddDirectoratebranchIdToComplaintTable extends Migration
     public function up()
     {
         Schema::table('complaint', function (Blueprint $table) {
-            $table->foreignId('directoratebranch_id');
-            $table->foreign('directoratebranch_id')->references('id')->on('directoratebranch');
+            $table->foreignId('branch_id');
+            $table->foreign('branch_id')->references('id')->on('branch');
         });
     }
 

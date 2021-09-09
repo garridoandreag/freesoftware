@@ -13,7 +13,7 @@ class CreateDirectoratebranchTable extends Migration
      */
     public function up()
     {
-        Schema::create('directoratebranch', function (Blueprint $table) {
+        Schema::create('branch', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('name');
@@ -21,7 +21,7 @@ class CreateDirectoratebranchTable extends Migration
             $table->foreignId('directorate_id');
             $table->foreign('directorate_id')->references('id')->on('directorate');
             $table->boolean('status')->default(1);
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
         });
     }
 
