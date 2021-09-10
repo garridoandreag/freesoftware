@@ -11,8 +11,6 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $table = 'user';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +19,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role_id',
+        'branch_id',
         'password',
     ];
 
@@ -42,4 +42,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //one to many (inverse)
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

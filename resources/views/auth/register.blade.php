@@ -61,6 +61,35 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="role_id" class="col-md-4 col-form-label text-md-right">{{ __('role_id') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="role_id" type="text" class="form-control @error('role_id') is-invalid @enderror" name="role_id" value="{{ old('role_id') }}" required autocomplete="role_id" autofocus>
+
+                                @error('role_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="branch_id" class="col-md-4 col-form-label text-md-right">{{ __('branch_id') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="branch_id" type="text" class="form-control @error('branch_id') is-invalid @enderror" name="branch_id" value="{{ old('branch_id') }}" required autocomplete="branch_id" autofocus>
+
+                                @error('branch_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

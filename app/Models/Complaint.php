@@ -12,6 +12,11 @@ class Complaint extends Model
     protected $table = 'complaint';
     protected $primaryKey = 'id';
 
+    protected $fillable = ['summary','description','vendor_id','departmend_id','town_id','branchoffice_id','status'];
+
+    public $sortable =['summary','description','vendor_id','departmend_id','town_id','branchoffice_id','status'];
+    
+
     //one to many (inverse)
     public function branchoffice()
     {
@@ -34,6 +39,18 @@ class Complaint extends Model
     public function town()
     {
         return $this->belongsTo(Town::class);
+    }
+
+    //one to many (inverse)
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    //one to many (inverse)
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
 }

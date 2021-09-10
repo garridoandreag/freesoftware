@@ -14,7 +14,7 @@ class TownSeeder extends Seeder
      */
     public function run()
     {
-        /* Guatemala 
+        /* Guatemala  */
         DB::table('town')->insert([
             'name' => 'Amatitlán',
             'department_id' => 6,
@@ -55,7 +55,7 @@ class TownSeeder extends Seeder
             'department_id' => 6,
         ]);
 
-        ALTA VERAPAZ */
+        /*ALTA VERAPAZ */
         DB::table('town')->insert([
             'name' => 'Chahal',
             'department_id' => 1,

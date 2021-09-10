@@ -16,7 +16,7 @@ class ComplaintController extends Controller
      */
     public function index()
     {
-        $complaints = Department::all();
+        $complaints = Complaint::all();
 
         return view('complaint.index',compact('complaints'));
     }
@@ -39,9 +39,40 @@ class ComplaintController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'summary' => ['required', 'string', 'max:80'],
+            'description' => ['required', 'string', 'max:800'],
+            'anonymous' => ['nullable'],
+            'nit' => ['nullable'],
+            'autor' => ['nullable'],
+            'vendor_id' => ['required'],
+            'branchoffice_id' => ['required'],
+            'department_id' => ['required'],
+            'town_id' => ['required'],
+            'branch_id' => ['nullable'],
+            'category_id' => ['nullable'],
+        ]);
+
+        if ($validator->fails())
+        {
+            return response(['error' => $validator->errors()], HttpStatusCode::BadRequest);
+        }
+
+        Complaint::create([
+            'summary'=> $data['summary'],
+            'description'=> $data['description'],
+            'anonymous' => 1,
+            'vendor_id' => $data['vendor_id'],
+            'branchoffice_id' => $data['branchoffice_id'],
+            'department_id' => $data['department_id'],
+        ]);
+
+        return response(['message' => 'Created success'], HttpStatusCode::Created);
     }
 
     /**

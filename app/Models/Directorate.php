@@ -12,9 +12,9 @@ class Directorate extends Model
     protected $table = 'directorate';
     protected $primaryKey = 'id';
 
-    public function directoratebranchs()
+    public function branchs()
     {
-        return $this->hasMany(Directoratebranch::class);
+        return $this->hasMany(Branch::class);
     }
 
 }
