@@ -17,10 +17,11 @@ class CreateComplaintTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('summary');
-            $table->multiLineString('description');
+            $table->text('description');
             $table->boolean('anonymous');
             $table->string('nit');
             $table->string('autor');
+            $table->string('code',45)->index();
             $table->boolean('status')->default(1);
             $table->foreignId('vendor_id');
             $table->foreignId('branchoffice_id');

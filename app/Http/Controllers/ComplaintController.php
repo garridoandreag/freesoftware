@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Complaint;
-use App\Models\Department;
-use App\Models\Vendor;
+use App\Models\{Complaint, Vendor};
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
+use App\Enums\HttpStatusCode;
 
 class ComplaintController extends Controller
 {
@@ -42,9 +43,8 @@ class ComplaintController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
 
-        $validator = Validator::make($data, [
+        $data = $request->validate([
             'summary' => ['required', 'string', 'max:80'],
             'description' => ['required', 'string', 'max:800'],
             'anonymous' => ['nullable'],
@@ -58,21 +58,19 @@ class ComplaintController extends Controller
             'category_id' => ['nullable'],
         ]);
 
-        if ($validator->fails())
-        {
-            return response(['error' => $validator->errors()], HttpStatusCode::BadRequest);
-        }
-
         Complaint::create([
             'summary'=> $data['summary'],
             'description'=> $data['description'],
             'anonymous' => 1,
             'vendor_id' => $data['vendor_id'],
-            'branchoffice_id' => $data['branchoffice_id'],
             'department_id' => $data['department_id'],
+            'branchoffice_id' => $data['branchoffice_id'],
+            'town_id' => $data['town_id'],
+            'branch_id' => 1,
         ]);
 
-        return response(['message' => 'Created success'], HttpStatusCode::Created);
+        return redirect()->route('complaint.index')
+                    ->with(['status' => 'Queja registrada con éxito!']);
     }
 
     /**
@@ -81,9 +79,27 @@ class ComplaintController extends Controller
      * @param  \App\Models\Complaint  $complaint
      * @return \Illuminate\Http\Response
      */
-    public function show(Complaint $complaint)
+
+    public function search()
     {
-        //
+        return view('complaint.search');
+    }
+
+    public function show(Request $request)
+    {
+        $complaint = Complaint::where('code',$request->code)->first();
+
+        return view('complaint.detail', [
+            'complaint' => $complaint
+        ]);
+    }
+
+    public function detail($id){
+        $complaint = Complaint::find($id);
+
+        return view('complaint.detail', [
+            'complaint' => $complaint
+        ]);
     }
 
     /**
@@ -108,7 +124,6 @@ class ComplaintController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *

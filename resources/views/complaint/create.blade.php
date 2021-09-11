@@ -6,13 +6,20 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
+
                 <div class="card border-primary mb-3">
-                    <div class="card-header"
+                    <h5 class="card-header"
                         style="background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);">
-                        {{ __('Crear Queja') }}</div>
+                        @if (isset($complaint) && is_object($complaint))
+                            Modificar Queja
+                        @else
+                            Nueva Queja
+                        @endif
+                </h5>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('complaint.create') }}">
+                        <form method="POST"
+                            action="{{ isset($complaint) ? route('complaint.update') : route('complaint.store') }}">
                             @csrf
 
                             <div class="form-group row">
@@ -131,7 +138,7 @@
                                     class="col-md-4 col-form-label text-md-right">{{ __('Descripción') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="description" class="form-control"
+                                    <textarea id="description" name="description" class="form-control"
                                         placeholder="Explique a detalle el inconveniente." required></textarea>
 
                                     @error('name')
@@ -142,38 +149,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Adjunto') }}</label>
-      
-                                <div class="col-md-6">
-                                    <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="" required>
-      
-                                    @error('image')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                             </div>
-
-                            <!--<div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                                            {{ old('remember') ? 'checked' : '' }}>
-
-                                        <label class="form-check-label" for="remember">
-                                            {{ __('Anónimo') }}
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="g-recaptcha" data-sitekey="6LcHqkMcAAAAAF2v6O0oLUNoPgFoPKuVP4mr_Z7n">
-                                    </div>
-                                </div>
-                            </div> -->
+                           
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
@@ -187,7 +163,7 @@
             </div>
         </div>
     </div>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <script>
         $(document).ready(function() {
 
@@ -285,7 +261,7 @@
                         dataType: 'json',
                         success: function(data) {
 
-                            console.log('sucursal sin zona: '+zone_val);
+                            console.log('sucursal sin zona: ' + zone_val);
                             console.log(data);
 
                             $("#branchoffice").empty();
@@ -318,7 +294,7 @@
                         dataType: 'json',
                         success: function(data) {
 
-                            console.log('sucursal con zona: '+zone_val);
+                            console.log('sucursal con zona: ' + zone_val);
                             console.log(data);
 
                             $("#branchoffice").empty();
@@ -334,7 +310,7 @@
                     });
                 } else {
                     $("#branchoffice").empty();
-                
+
                 }
 
             });

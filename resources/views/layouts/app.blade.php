@@ -28,7 +28,8 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    
+    <!-- ICONOS BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
  
 
     

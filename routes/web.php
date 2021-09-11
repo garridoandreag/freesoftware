@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('complaint.search');
 });
 
 Auth::routes();
@@ -24,6 +24,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('complaint')->group(function () {
     Route::get('/', [App\Http\Controllers\ComplaintController::class, 'index'])->name('complaint.index');
     Route::get('/create', [App\Http\Controllers\ComplaintController::class, 'create'])->name('complaint.create');
+    Route::post('/store', [App\Http\Controllers\ComplaintController::class, 'store'])->name('complaint.store');
+    Route::get('/search', [App\Http\Controllers\ComplaintController::class, 'search'])->name('complaint.search');
+    Route::post('/show', [App\Http\Controllers\ComplaintController::class, 'show'])->name('complaint.show');
+    Route::get('/detail/{id}', [App\Http\Controllers\ComplaintController::class, 'detail'])->name('complaint.detail');
+
+    Route::post('/status', [App\Http\Controllers\ComplaintController::class, 'status'])->name('complaint.status');
 });
 
 

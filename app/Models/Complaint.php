@@ -12,9 +12,9 @@ class Complaint extends Model
     protected $table = 'complaint';
     protected $primaryKey = 'id';
 
-    protected $fillable = ['summary','description','vendor_id','departmend_id','town_id','branchoffice_id','status'];
+    protected $fillable = ['summary','description','code','anonymous','nit','autor','vendor_id','department_id','town_id','branchoffice_id','status','branch_id','category_id'];
 
-    public $sortable =['summary','description','vendor_id','departmend_id','town_id','branchoffice_id','status'];
+    public $sortable = ['summary','description','code','anonymous','nit','autor','vendor_id','department_id','town_id','branchoffice_id','status','branch_id','category_id'];
     
 
     //one to many (inverse)
