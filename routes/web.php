@@ -44,6 +44,15 @@ Route::prefix('user')->group(function () {
     Route::get('/image/{filename}', [App\Http\Controllers\UserController::class, 'getImage'])->name('user.image');
 });
 
+Route::prefix('vendor')->group(function () {
+    Route::get('/', [App\Http\Controllers\VendorController::class, 'index'])->name('vendor.index');
+    Route::get('/create', [App\Http\Controllers\VendorController::class, 'create'])->name('vendor.create');
+    Route::post('/store', [App\Http\Controllers\VendorController::class, 'store'])->name('vendor.store');
+    Route::get('detail/{id}', [App\Http\Controllers\VendorController::class, 'detail'])->name('vendor.detail');
+    Route::get('edit/{id}', [App\Http\Controllers\VendorController::class, 'edit'])->name('vendor.edit');
+    Route::post('/update', [App\Http\Controllers\VendorController::class, 'update'])->name('vendor.update'); 
+});
+
 Route::prefix('branchoffice')->group(function () {
     Route::get('/get/{vendor_id}/{town_id}/{zone_val?}', [App\Http\Controllers\BranchofficeController::class, 'get'])->name('branchoffice.get');
     Route::get('/getZones/{vendor_id}/{town_id}', [App\Http\Controllers\BranchofficeController::class, 'getZones'])->name('branchoffice.getZones');

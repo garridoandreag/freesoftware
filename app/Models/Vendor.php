@@ -10,15 +10,18 @@ class Vendor extends Model
     use HasFactory;
     protected $table = 'vendor';
 
-        //one to many
-        public function complaints()
-        {
-            return $this->hasMany(Complaint::class);
-        }
+    protected $fillable = ['name','registeredname', 'nit'];
 
-        //one to many
-        public function branchoffices()
-        {
-            return $this->hasMany(Branchoffice::class);
-        }
+    public $sortable = ['name','registeredname', 'nit'];
+    //one to many
+    public function complaints()
+    {
+        return $this->hasMany(Complaint::class);
+    }
+
+    //one to many
+    public function branchoffices()
+    {
+        return $this->hasMany(Branchoffice::class);
+    }
 }

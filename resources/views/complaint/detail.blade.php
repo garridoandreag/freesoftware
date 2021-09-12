@@ -170,35 +170,38 @@
 
                                 <div class="form-group row">
                                     <label for="description"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
+                                        class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
                                     <div class="col-md-6">
-                                    @if ($complaint->status == 0)
-                                    <h5><span id="status{{ $complaint->id }}" class="badge badge-pill badge-danger">
-                                            INACTIVO
-                                        </span></h5>
-                                    @endif
-                                    @if ($complaint->status == 1)
-                                    <h5><span id="status{{ $complaint->id }}" class="badge badge-pill badge-success">
-                                            ACTIVO
-                                        </span></h5>
-                                    @endif
-                                    @if ($complaint->status == 2)
-                                        <h5><span id="status{{ $complaint->id }}" class="badge badge-pill badge-primary">
-                                            REVISADO
-                                        </span></h5>
-                                    @endif
+                                        @if ($complaint->status == 0)
+                                            <h5><span id="status{{ $complaint->id }}"
+                                                    class="badge badge-pill badge-danger">
+                                                    INACTIVO
+                                                </span></h5>
+                                        @endif
+                                        @if ($complaint->status == 1)
+                                            <h5><span id="status{{ $complaint->id }}"
+                                                    class="badge badge-pill badge-success">
+                                                    ACTIVO
+                                                </span></h5>
+                                        @endif
+                                        @if ($complaint->status == 2)
+                                            <h5><span id="status{{ $complaint->id }}"
+                                                    class="badge badge-pill badge-primary">
+                                                    REVISADO
+                                                </span></h5>
+                                        @endif
                                     </div>
                                 </div>
                             </fieldset>
 
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-6 offset-md-4">
-                                        <a href="{{ route('complaint.index') }}" class="btn btn-outline-secondary">Cancelar </a>
-                                        <a href="#"
-                                            class="btn btn-primary">Imprimir</a>
-                                    </div>
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <a href="{{ route('complaint.index') }}" class="btn btn-outline-secondary">Cancelar
+                                    </a>
+                                    <a href="#" class="btn btn-primary">Imprimir</a>
                                 </div>
-                            
+                            </div>
+
                         </form>
                     </div>
                 </div>

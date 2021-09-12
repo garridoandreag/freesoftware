@@ -9,7 +9,7 @@
 
                 <div class="card border-primary mb-3">
                     <h5 class="card-header"
-                        style="background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);">
+                        style="color:white;background-image: linear-gradient(-225deg, #1e3c72 0%, #3490dc 48%, #6BBBFF 100%);">
                         @if (isset($complaint) && is_object($complaint))
                             Modificar Queja
                         @else

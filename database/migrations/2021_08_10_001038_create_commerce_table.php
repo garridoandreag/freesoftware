@@ -17,6 +17,7 @@ class CreateCommerceTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('name');
+            $table->string('registeredname');
             $table->string('nit');
             $table->boolean('status')->default(1);
             $table->timestamps();

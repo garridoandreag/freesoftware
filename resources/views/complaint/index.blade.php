@@ -4,12 +4,12 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="card border-primary mb-3">
-                    <div class="card-header"
-                        style="background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);">
+                    <h5 class="card-header"
+                        style="color:white;background-image: linear-gradient(-225deg, #1e3c72 0%, #3490dc 48%, #6BBBFF 100%);">
                         {{ __('Quejas') }}
-                    </div>
+                    </h5>
                     <div class="card-body">
 
                         @if (session('status'))
@@ -24,11 +24,10 @@
                         @endif
 
 
-                        <table id="example" class="table table-striped table-hover" style="width:100%">
+                        <table id="example" class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>Título</th>
-                                    <th>Descripción</th>
                                     <th>Proveedor</th>
                                     <th>Departamento</th>
                                     <th>Municipio</th>
@@ -41,10 +40,6 @@
                                     <tr>
                                         <td><a href="{{ route('complaint.detail', ['id' => $complaint->id]) }}">
                                                 {{ $complaint->summary }}
-                                            </a>
-                                        </td>
-                                        <td><a href="{{ route('complaint.detail', ['id' => $complaint->id]) }}">
-                                                {{ $complaint->description }}
                                             </a>
                                         </td>
                                         <td><a href="{{ route('complaint.detail', ['id' => $complaint->id]) }}">
@@ -61,17 +56,17 @@
                                             </a></td>
                                         <td>
                                             @if ($complaint->status == 0)
-                                                <span id="status{{ $complaint->id }}" class="status badge badge-danger">
+                                                <span id="status{{ $complaint->id }}" class="status badge badge-pill badge-danger">
                                                     INACTIVO
                                                 </span>
                                             @endif
                                             @if ($complaint->status == 1)
-                                                <span id="status{{ $complaint->id }}" class="status badge badge-success">
+                                                <span id="status{{ $complaint->id }}" class="status badge badge-pill badge-success">
                                                     ACTIVO
                                                 </span>
                                             @endif
                                             @if ($complaint->status == 2)
-                                                <span id="status{{ $complaint->id }}" class="status badge badge-primary">
+                                                <span id="status{{ $complaint->id }}" class="status badge badge-pill badge-primary">
                                                     REVISADO
                                                 </span>
                                             @endif
@@ -79,17 +74,6 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Título</th>
-                                    <th>Descripción</th>
-                                    <th>Proveedor</th>
-                                    <th>Departamento</th>
-                                    <th>Municipio</th>
-                                    <th>Sucursal</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </tfoot>
                         </table>
 
 

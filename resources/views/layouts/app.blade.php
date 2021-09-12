@@ -36,7 +36,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm" style="background-image: linear-gradient(-225deg, #1e3c72 0%, #3490dc 48%, #6BBBFF 100%);">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     @include('includes.logo')
@@ -54,22 +54,31 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('complaint.create') }}">{{ __('Haz tu queja') }}</a>
+                            <a class="nav-link" href="{{ route('vendor.index') }}" style="color: white"><i class="bi bi-shop"></i> Proveedores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('vendor.index') }}" style="color: white"><i class="bi bi-shop-window"></i> Sucursales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('complaint.create') }}" style="color: white"><i class="bi bi-megaphone"></i> Haz tu queja</a>
                         </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}" style="color: white">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}" style="color: white">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('complaint.index') }}" style="color: white"><i class="bi bi-megaphone"></i> Quejas</a>
+                        </li>
                         <li>
                             @include('includes.avatar')
                         </li>

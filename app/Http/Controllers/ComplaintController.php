@@ -6,7 +6,6 @@ use App\Models\{Complaint, Vendor};
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
-use App\Enums\HttpStatusCode;
 
 class ComplaintController extends Controller
 {

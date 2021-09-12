@@ -9,8 +9,7 @@
                 <br>
                 <br>
                 <div class="card border-primary mb-3">
-                    <h5 class="card-header"
-                        style="background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);">
+                    <h5 class="card-header" style="color:white;background-image: linear-gradient(-225deg, #1e3c72 0%, #3490dc 48%, #6BBBFF 100%);">
                         Quejas
                     </h5>
 
@@ -43,8 +42,7 @@
 
                             <div class="form-group row mb-3">
                                 <div class="col-md-6 offset-md-3">
-                                    <a href="#" class="btn btn-outline-success btn-lg btn-block "><i
-                                            class="bi bi-plus-circle-fill"></i>  Crear Queja</a>
+                                    <a href="#" class="btn btn-success btn-lg btn-block "><i class="bi bi-plus-circle"></i> Crear Queja</a>
                                 </div>
                             </div>
                         </form>

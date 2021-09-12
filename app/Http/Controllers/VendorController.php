@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class VendorController extends Controller
 {
@@ -14,7 +16,9 @@ class VendorController extends Controller
      */
     public function index()
     {
-        //
+        $vendors = Vendor::all();
+
+        return view('vendor.index',compact('vendors'));
     }
 
     /**
@@ -24,7 +28,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        //
+        return view('vendor.create');
     }
 
     /**
@@ -35,7 +39,32 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:80'],
+            'registeredname' => ['required', 'string', 'max:100'],
+            'nit' => ['required', 'string'],
+        ]);
+
+        if ($request->has('status')) {
+            Vendor::create([
+                'name' => $data['name'],
+                'registeredname' => $data['registeredname'],
+                'nit' => $data['nit'],
+                'status' => 1,
+            ]); 
+        }else{
+            Vendor::create([
+                'name' => $data['name'],
+                'registeredname' => $data['registeredname'],
+                'nit' => $data['nit'],
+                'status' => 0,
+            ]);
+        }
+
+
+        return redirect()->route('vendor.index')
+        ->with(['status' => 'Proveedor registrado con éxito!']);
+
     }
 
     /**
@@ -44,9 +73,13 @@ class VendorController extends Controller
      * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function show(Vendor $vendor)
+    public function detail($id)
     {
-        //
+        $vendor = Vendor::find($id);
+
+        return view('vendor.detail', [
+            'vendor' => $vendor
+        ]);
     }
 
     /**
@@ -55,9 +88,13 @@ class VendorController extends Controller
      * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Vendor $vendor)
+    public function edit($id)
     {
-        //
+        $vendor = Vendor::find($id);
+
+        return view('vendor.create', [
+            'vendor' => $vendor
+        ]);
     }
 
     /**
@@ -67,9 +104,30 @@ class VendorController extends Controller
      * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vendor $vendor)
+    public function update(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $vendor = Vendor::find($id);
+
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:80'],
+            'registeredname' => ['required', 'string', 'max:100'],
+            'nit' => ['required', 'string'],
+        ]);
+
+        $vendor->name = $data['name'];
+        $vendor->registeredname = $data['registeredname'];
+        $vendor->nit = $data['nit'];
+
+        if ($request->has('status')) {
+            $vendor->status = 1;
+        }else{
+            $vendor->status = 0;
+        }
+        $vendor->update();
+
+        return redirect()->route('vendor.index')
+        ->with(['status' => 'Proveedor actualizado con éxito!']);
     }
 
     /**
