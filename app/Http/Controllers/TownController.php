@@ -83,12 +83,17 @@ class TownController extends Controller
         //
     }
 
-    public function get($vendor_id,$department_id){
+    public function get($department_id,$vendor_id = ''){
 
-        $towns = Town::join('branchoffice', 'town.id', '=','branchoffice.town_id')
-        ->where('branchoffice.vendor_id',$vendor_id)
-        ->where('town.department_id',$department_id)
-        ->pluck('town.name','town.id');
+        if(isset($vendor_id) && !empty($vendor_id)){
+            $towns = Town::join('branchoffice', 'town.id', '=','branchoffice.town_id')
+            ->where('branchoffice.vendor_id',$vendor_id)
+            ->where('town.department_id',$department_id)
+            ->pluck('town.name','town.id');
+        }else{
+            $towns = Town::where('town.department_id',$department_id)
+            ->pluck('town.name','town.id');
+        }
 
         return json_encode($towns);
 

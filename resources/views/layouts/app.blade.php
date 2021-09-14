@@ -57,7 +57,7 @@
                             <a class="nav-link" href="{{ route('vendor.index') }}" style="color: white"><i class="bi bi-shop"></i> Proveedores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('vendor.index') }}" style="color: white"><i class="bi bi-shop-window"></i> Sucursales</a>
+                            <a class="nav-link" href="{{ route('branchoffice.index') }}" style="color: white"><i class="bi bi-shop-window"></i> Sucursales</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('complaint.create') }}" style="color: white"><i class="bi bi-megaphone"></i> Haz tu queja</a>

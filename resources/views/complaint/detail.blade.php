@@ -9,7 +9,7 @@
                 <div class="card border-primary mb-3">
                     <h5 class="card-header"
                         style="background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);">
-                        Queja
+                        Detalle de la Queja
                     </h5>
 
                     <div class="card-body">

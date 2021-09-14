@@ -207,7 +207,7 @@
 
                 if (department_id) {
                     $.ajax({
-                        url: '/town/get/' + vendor_id + '/' + department_id,
+                        url: '/town/get/' + department_id + '/' + vendor_id,
                         type: 'GET',
                         dataType: 'json',
                         success: function(data) {

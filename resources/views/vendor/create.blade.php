@@ -22,15 +22,15 @@
                             @csrf
 
                             @if (isset($vendor) && is_object($vendor))
-                                <input type="hidden" name="id" value="{{ $vendor->id}}" /><br>
+                                <input type="hidden" name="id" value="{{ $vendor->id }}" /><br>
                             @endif
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Nombre Comercial</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                        name="name" placeholder="Nombre Comercial" value="{{ $vendor->name ?? '' }}" required
-                                        autocomplete="name" autofocus>
+                                        name="name" placeholder="Nombre Comercial" value="{{ $vendor->name ?? '' }}"
+                                        required autocomplete="name" autofocus>
 
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -48,8 +48,8 @@
                                     <input id="registeredname" type="text"
                                         class="form-control @error('registeredname') is-invalid @enderror"
                                         name="registeredname" placeholder="Razón Social"
-                                        value="{{ $vendor->registeredname ?? ''  }}" required autocomplete="registeredname"
-                                        autofocus>
+                                        value="{{ $vendor->registeredname ?? '' }}" required
+                                        autocomplete="registeredname" autofocus>
 
                                     @error('registeredname')
                                         <span class="invalid-feedback" role="alert">
@@ -64,7 +64,7 @@
 
                                 <div class="col-md-6">
                                     <input id="nit" type="text" class="form-control @error('nit') is-invalid @enderror"
-                                        name="nit" placeholder="Nit" value="{{ $vendor->nit ?? ''  }}" required
+                                        name="nit" placeholder="Nit" value="{{ $vendor->nit ?? '' }}" required
                                         autocomplete="nit" autofocus>
 
                                     @error('nit')
@@ -75,17 +75,19 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="status" id="status"
-                                        {{ old('status', $vendor->status ?? '') >= 1 ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="status">
-                                            Activo
-                                        </label>
+                            @if (isset($vendor) && is_object($vendor))
+                                <div class="form-group row">
+                                    <div class="col-md-6 offset-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="status" id="status"
+                                                {{ old('status', $vendor->status ?? '') >= 1 ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="status">
+                                                Activo
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

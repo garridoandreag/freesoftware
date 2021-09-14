@@ -45,22 +45,11 @@ class VendorController extends Controller
             'nit' => ['required', 'string'],
         ]);
 
-        if ($request->has('status')) {
-            Vendor::create([
-                'name' => $data['name'],
-                'registeredname' => $data['registeredname'],
-                'nit' => $data['nit'],
-                'status' => 1,
-            ]); 
-        }else{
-            Vendor::create([
-                'name' => $data['name'],
-                'registeredname' => $data['registeredname'],
-                'nit' => $data['nit'],
-                'status' => 0,
-            ]);
-        }
-
+        Vendor::create([
+            'name' => $data['name'],
+            'registeredname' => $data['registeredname'],
+            'nit' => $data['nit'],
+        ]); 
 
         return redirect()->route('vendor.index')
         ->with(['status' => 'Proveedor registrado con éxito!']);

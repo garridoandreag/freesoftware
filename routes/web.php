@@ -54,12 +54,18 @@ Route::prefix('vendor')->group(function () {
 });
 
 Route::prefix('branchoffice')->group(function () {
+    Route::get('/', [App\Http\Controllers\BranchofficeController::class, 'index'])->name('branchoffice.index');
+    Route::get('/create', [App\Http\Controllers\BranchofficeController::class, 'create'])->name('branchoffice.create');
+    Route::post('/store', [App\Http\Controllers\BranchofficeController::class, 'store'])->name('branchoffice.store');
+    Route::get('/edit/{id}', [App\Http\Controllers\BranchofficeController::class, 'edit'])->name('branchoffice.edit');
+    Route::get('/detail/{id}', [App\Http\Controllers\BranchofficeController::class, 'detail'])->name('branchoffice.detail');
+    Route::post('/update', [App\Http\Controllers\BranchofficeController::class, 'update'])->name('branchoffice.update');
     Route::get('/get/{vendor_id}/{town_id}/{zone_val?}', [App\Http\Controllers\BranchofficeController::class, 'get'])->name('branchoffice.get');
     Route::get('/getZones/{vendor_id}/{town_id}', [App\Http\Controllers\BranchofficeController::class, 'getZones'])->name('branchoffice.getZones');
 });
 
 Route::prefix('town')->group(function () {
-    Route::get('/get/{vendor_id}/{department_id}', [App\Http\Controllers\TownController::class, 'get'])->name('town.get');
+    Route::get('/get/{department_id}/{vendor_id?}', [App\Http\Controllers\TownController::class, 'get'])->name('town.get');
 });
 
 Route::prefix('department')->group(function () {
