@@ -10,6 +10,9 @@
     <title>{{ config('app.name', 'DIACO') }}</title>
 
     <!-- Scripts -->
+    <!-- Char.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js" integrity="sha256-bC3LCZCwKeehY6T4fFi9VfOU0gztUa+S4cnkIhVPZ5E=" crossorigin="anonymous"></script>
+    <!-- app -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('datatables/datatables.min.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}" defer></script>

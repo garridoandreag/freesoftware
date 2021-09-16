@@ -11,6 +11,8 @@ class Branchoffice extends Model
 
     protected $table = 'branchoffice';
     protected $primaryKey = 'id';
+    
+    protected $fillable = ['name','addnit','nit','zone', 'address','vendor_id', 'town_id'];
 
     //one to many
     public function complaints()

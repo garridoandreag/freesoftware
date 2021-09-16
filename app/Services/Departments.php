@@ -9,8 +9,6 @@ class Departments {
 
     $departments = Department::get()->where('status',1);
 
-    $departmentsArray = ['Seleccione un departamento'];
-
     foreach($departments as $department){
 
       $departmentsArray[$department->id] = $department->name;

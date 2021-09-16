@@ -29,6 +29,7 @@
                                 <div class="col-md-6">
                                     <select id="vendor" name="vendor_id"
                                         class="form-control  @error('vendor_id') is-invalid @enderror">
+                                        <option value="">Seleccione un proveedor</option>
                                         @foreach ($vendors->get() as $index => $vendor)
                                             <option value="{{ $index }}"
                                                 {{ old('vendor_id', $complaint->vendor_id ?? '') == $index ? 'selected' : '' }}>

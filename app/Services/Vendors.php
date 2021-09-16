@@ -9,8 +9,6 @@ class Vendors {
 
     $vendors = Vendor::get()->where('status',1);
 
-    $vendorsArray = ['Seleccione un proveedor'];
-
     foreach($vendors as $vendor){
 
       $vendorsArray[$vendor->id] = $vendor->name;

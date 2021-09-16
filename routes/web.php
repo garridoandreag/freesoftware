@@ -71,3 +71,8 @@ Route::prefix('town')->group(function () {
 Route::prefix('department')->group(function () {
     Route::get('/get/{id}', [App\Http\Controllers\DepartmentController::class, 'get'])->name('department.get');
 });
+
+Route::prefix('stadistic')->group(function () {
+    Route::get('/charts', [App\Http\Controllers\StadisticController::class, 'charts'])->name('stadistic.charts');
+    Route::get('/getComplaints', [App\Http\Controllers\StadisticController::class, 'getComplaints'])->name('stadistic.getComplaints');
+});

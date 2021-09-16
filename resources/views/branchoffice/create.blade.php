@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-
+@inject('vendors','App\Services\Vendors')
+@inject('departments','App\Services\Departments')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
@@ -48,7 +49,7 @@
                                     <select id="vendor" name="vendor_id"
                                         class="form-control  @error('vendor_id') is-invalid @enderror">
                                         <option value="">Seleccione un proveedor</option>
-                                        @foreach ($vendors as $index => $vendor)
+                                        @foreach ($vendors->get() as $index => $vendor)
                                             <option value="{{ $index }}"
                                                 {{ old('vendor_id', $branchoffice->vendor_id ?? '') == $index ? 'selected' : '' }}>
                                                 {{ $vendor }}
@@ -72,9 +73,9 @@
                                     <select id="department" name="department_id"
                                         class="form-control  @error('department_id') is-invalid @enderror">
                                         <option value="">Seleccione un departamento</option>
-                                        @foreach ($departments as $index => $department)
+                                        @foreach ($departments->get() as $index => $department)
                                             <option value="{{ $index }}"
-                                                {{ old('department_id', $branchoffice->department_id ?? '') == $index ? 'selected' : '' }}>
+                                                {{ old('department_id', $branchoffice->town->department_id ?? '') == $index ? 'selected' : '' }}>
                                                 {{ $department }}
                                             </option>
                                         @endforeach
@@ -95,7 +96,7 @@
                                 <div class="col-md-6">
                                     <select id="town" name="town_id"
                                         class="form-control  @error('town_id') is-invalid @enderror">
-                                        <option value="">Seleccione un municipio</option>
+                                        <option value="{{ $branchoffice->town_id ?? '' }}">{{ $branchoffice->town->name ?? '' }}</option>
                                     </select>
 
                                     @error('town_id')
@@ -157,8 +158,8 @@
 
                                 <div class="col-md-6" >
                                     <input id="nit" type="text" class="form-control @error('nit') is-invalid @enderror"
-                                        name="nit" placeholder="Nit" value="{{ $branchoffice->nit ?? '' }}" required
-                                        autocomplete="nit" autofocus>
+                                        name="nit" placeholder="Nit" value="{{ $branchoffice->nit ?? '' }}"
+                                        autocomplete="nit" >
 
                                     @error('nit')
                                         <span class="invalid-feedback" role="alert">

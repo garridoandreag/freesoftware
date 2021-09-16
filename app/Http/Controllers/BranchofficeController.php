@@ -52,10 +52,9 @@ class BranchofficeController extends Controller
             'town_id' => ['required'],
         ]);
 
-        Vendor::create([
+        Branchoffice::create([
             'name' => $data['name'],
-            'addnit' => $data['addnit'],
-            'nit' => $data['nit'],
+
             'zone' => $data['zone'],
             'address' => $data['address'],
             'vendor_id' => $data['vendor_id'],
@@ -95,9 +94,10 @@ class BranchofficeController extends Controller
     {
         $branchoffice = Branchoffice::find($id);
 
-        return view('branchoffice.create', [
-            'branchoffice' => $branchoffice
-        ]);
+        $departments = Department::get()->where('status',1)->pluck('name','id');
+        $vendors = Vendor::get()->where('status',1)->pluck('name','id');
+
+        return view('branchoffice.create', compact('branchoffice', 'departments', 'vendors'));
     }
 
     /**
