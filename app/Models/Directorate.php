@@ -11,6 +11,8 @@ class Directorate extends Model
 
     protected $table = 'directorate';
     protected $primaryKey = 'id';
+    
+    protected $fillable = ['name','logo','status'];
 
     public function branchs()
     {

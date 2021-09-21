@@ -6,6 +6,8 @@ use App\Models\{Complaint, Vendor};
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
+use DB;
 
 class ComplaintController extends Controller
 {
@@ -42,7 +44,6 @@ class ComplaintController extends Controller
 
     public function store(Request $request)
     {
-
         $data = $request->validate([
             'summary' => ['required', 'string', 'max:80'],
             'description' => ['required', 'string', 'max:800'],
@@ -56,6 +57,9 @@ class ComplaintController extends Controller
             'branch_id' => ['nullable'],
             'category_id' => ['nullable'],
         ]);
+        $nowTimeDate = Carbon::now();
+
+        $code = collect(DB::select('SELECT getComplaintCode(?,?,?) AS code', [$data['department_id'],$data['town_id'],$nowTimeDate]))->first()->code;
 
         Complaint::create([
             'summary'=> $data['summary'],
@@ -66,9 +70,10 @@ class ComplaintController extends Controller
             'branchoffice_id' => $data['branchoffice_id'],
             'town_id' => $data['town_id'],
             'branch_id' => 1,
+            'code' => $code,
         ]);
 
-        return redirect()->route('complaint.index')
+        return redirect()->route('complaint.search')
                     ->with(['status' => 'Queja registrada con éxito!']);
     }
 
@@ -107,9 +112,13 @@ class ComplaintController extends Controller
      * @param  \App\Models\Complaint  $complaint
      * @return \Illuminate\Http\Response
      */
-    public function edit(Complaint $complaint)
+    public function review($id)
     {
-        //
+        $complaint = Complaint::find($id);
+
+        return view('complaint.review', [
+            'complaint' => $complaint
+        ]);
     }
 
     /**
@@ -122,6 +131,24 @@ class ComplaintController extends Controller
     public function update(Request $request, Complaint $complaint)
     {
         //
+    }
+
+    public function reviewUpdate(Request $request)
+    {
+        $id = $request->input('id');
+        $complaint = Complaint::find($id);
+
+        $data = $request->validate([
+            'category_id' => ['required'],
+            'status' => ['required'],
+        ]);
+
+        $complaint->category_id = $data['category_id'];
+        $complaint->status = $data['status'];
+        $complaint->update();
+
+        return redirect()->route('complaint.index')
+        ->with(['status' => 'Queja revisada con éxito!']);
     }
     /**
      * Remove the specified resource from storage.

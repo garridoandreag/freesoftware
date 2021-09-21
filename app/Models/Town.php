@@ -11,6 +11,10 @@ class Town extends Model
 
     protected $table = 'town';
 
+    protected $primaryKey = 'id';
+    
+    protected $fillable = ['name','department_id','status'];
+
     //one to many
     public function complaints()
     {

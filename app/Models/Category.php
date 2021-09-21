@@ -11,6 +11,8 @@ class Category extends Model
 
     protected $table = 'category';
 
+    protected $fillable = ['name','status'];
+
     //one to many
     public function complaints()
     {

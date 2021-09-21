@@ -198,6 +198,7 @@
                                 <div class="col-md-6 offset-md-4">
                                     <a href="{{ route('complaint.index') }}" class="btn btn-outline-secondary">Cancelar
                                     </a>
+                                    <a href="{{ route('complaint.review',['id' => $complaint->id])}}" class="btn btn-primary">Revisar</a>
                                     <a href="#" class="btn btn-primary">Imprimir</a>
                                 </div>
                             </div>

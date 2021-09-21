@@ -48,4 +48,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    //one to many
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
 }

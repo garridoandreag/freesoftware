@@ -25,6 +25,9 @@ Route::prefix('complaint')->group(function () {
     Route::get('/', [App\Http\Controllers\ComplaintController::class, 'index'])->name('complaint.index');
     Route::get('/create', [App\Http\Controllers\ComplaintController::class, 'create'])->name('complaint.create');
     Route::post('/store', [App\Http\Controllers\ComplaintController::class, 'store'])->name('complaint.store');
+    Route::get('/review/{id}', [App\Http\Controllers\ComplaintController::class, 'review'])->name('complaint.review');
+    Route::post('/reviewUpdate', [App\Http\Controllers\ComplaintController::class, 'reviewUpdate'])->name('complaint.reviewUpdate');
+    Route::post('/update', [App\Http\Controllers\ComplaintController::class, 'update'])->name('complaint.update');
     Route::get('/search', [App\Http\Controllers\ComplaintController::class, 'search'])->name('complaint.search');
     Route::post('/show', [App\Http\Controllers\ComplaintController::class, 'show'])->name('complaint.show');
     Route::get('/detail/{id}', [App\Http\Controllers\ComplaintController::class, 'detail'])->name('complaint.detail');
@@ -39,6 +42,9 @@ Route::prefix('directorate')->group(function () {
 });
 
 Route::prefix('user')->group(function () {
+    Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
+    Route::get('/create', [App\Http\Controllers\UserController::class, 'create'])->name('user.register');
+    Route::get('/detail', [App\Http\Controllers\UserController::class, 'detail'])->name('user.detail');
     Route::get('/config', [App\Http\Controllers\UserController::class, 'config'])->name('user.config');
     Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
     Route::get('/image/{filename}', [App\Http\Controllers\UserController::class, 'getImage'])->name('user.image');
@@ -73,6 +79,19 @@ Route::prefix('department')->group(function () {
 });
 
 Route::prefix('stadistic')->group(function () {
-    Route::get('/charts', [App\Http\Controllers\StadisticController::class, 'charts'])->name('stadistic.charts');
-    Route::get('/getComplaints', [App\Http\Controllers\StadisticController::class, 'getComplaints'])->name('stadistic.getComplaints');
+    Route::get('/chart1', [App\Http\Controllers\StadisticController::class, 'chart1'])->name('stadistic.chart1');
+    Route::get('/chart2', [App\Http\Controllers\StadisticController::class, 'chart2'])->name('stadistic.chart2');
+    Route::get('/chart3', [App\Http\Controllers\StadisticController::class, 'chart3'])->name('stadistic.chart3');
+    Route::get('/getComplaints/{vendor_id?}', [App\Http\Controllers\StadisticController::class, 'getComplaints'])->name('stadistic.getComplaints');
+    Route::get('/getComplaintsByRegion/{vendor_id?}', [App\Http\Controllers\StadisticController::class, 'getComplaintsByRegion'])->name('stadistic.getComplaintsByRegion');
+    Route::get('/getComplaintsByCategory/{vendor_id?}', [App\Http\Controllers\StadisticController::class, 'getComplaintsByCategory'])->name('stadistic.getComplaintsByCategory');
+});
+
+Route::prefix('category')->group(function () {
+    Route::get('/', [App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
+    Route::get('/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('category.create');
+    Route::post('/store', [App\Http\Controllers\CategoryController::class, 'store'])->name('category.store');
+    Route::get('detail/{id}', [App\Http\Controllers\CategoryController::class, 'detail'])->name('category.detail');
+    Route::get('edit/{id}', [App\Http\Controllers\CategoryController::class, 'edit'])->name('category.edit');
+    Route::post('/update', [App\Http\Controllers\CategoryController::class, 'update'])->name('category.update'); 
 });

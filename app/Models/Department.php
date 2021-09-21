@@ -11,6 +11,10 @@ class Department extends Model
 
     protected $table = 'department';
 
+    protected $primaryKey = 'id';
+    
+    protected $fillable = ['name','region_id','status'];
+
     public function region(){
         return $this->belongsTo(Region::class);
     }

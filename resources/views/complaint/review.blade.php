@@ -2,6 +2,8 @@
 
 @section('content')
     @inject('vendors','App\Services\Vendors')
+    @inject('statuses','App\Services\Statuses')
+    @inject('categories','App\Services\Categories')
 
     <div class="container">
         <div class="row justify-content-center">
@@ -15,17 +17,18 @@
                         @else
                             Nueva Queja
                         @endif
-                </h5>
+                    </h5>
 
                     <div class="card-body">
                         <form method="POST"
-                            action="{{ isset($complaint) ? route('complaint.update') : route('complaint.store') }}">
+                            action="{{ route('complaint.reviewUpdate') }}">
                             @csrf
 
                             @if (isset($complaint) && is_object($complaint))
                                 <input type="hidden" name="id" value="{{ $complaint->id }}" /><br>
                             @endif
 
+                            <fieldset disabled>
                             <div class="form-group row">
                                 <label for="vendor_id"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Proveedor') }}</label>
@@ -57,7 +60,8 @@
                                 <div class="col-md-6">
                                     <select id="department" name="department_id"
                                         class="form-control  @error('department_id') is-invalid @enderror">
-                                        <option value="{{ $complaint->department_id ?? '' }}">{{ $complaint->department->name ?? '' }}</option>
+                                        <option value="{{ $complaint->department_id ?? '' }}">
+                                            {{ $complaint->department->name ?? '' }}</option>
                                     </select>
 
                                     @error('department_id')
@@ -69,13 +73,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="town_id"
-                                    class="col-md-4 col-form-label text-md-right">Municipio</label>
+                                <label for="town_id" class="col-md-4 col-form-label text-md-right">Municipio</label>
 
                                 <div class="col-md-6">
                                     <select id="town" name="town_id"
                                         class="form-control  @error('town_id') is-invalid @enderror">
-                                        <option value="{{ $complaint->town_id ?? '' }}">{{ $complaint->town->name ?? '' }}</option>
+                                        <option value="{{ $complaint->town_id ?? '' }}">
+                                            {{ $complaint->town->name ?? '' }}</option>
                                     </select>
 
                                     @error('town_id')
@@ -91,7 +95,8 @@
 
                                 <div class="col-md-6">
                                     <select id="zone" name="zone" class="form-control  @error('zone') is-invalid @enderror">
-                                        <option value="{{ $complaint->branchoffice->zone ?? '' }}">{{ $complaint->branchoffice->zone ?? '' }}</option>
+                                        <option value="{{ $complaint->branchoffice->zone ?? '' }}">
+                                            {{ $complaint->branchoffice->zone ?? '' }}</option>
                                     </select>
 
                                     @error('zone')
@@ -103,13 +108,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="branchoffice_id"
-                                    class="col-md-4 col-form-label text-md-right">Sucursal</label>
+                                <label for="branchoffice_id" class="col-md-4 col-form-label text-md-right">Sucursal</label>
 
                                 <div class="col-md-6">
                                     <select id="branchoffice" name="branchoffice_id"
                                         class="form-control  @error('branchoffice_id') is-invalid @enderror">
-                                        <option value="{{ $complaint->branchoffice_id ?? '' }}">{{ $complaint->branchoffice->address ?? '' }}</option>
+                                        <option value="{{ $complaint->branchoffice_id ?? '' }}">
+                                            {{ $complaint->branchoffice->address ?? '' }}</option>
                                     </select>
 
                                     @error('branchoffice_id')
@@ -121,13 +126,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="summary"
-                                    class="col-md-4 col-form-label text-md-right">Titulo</label>
+                                <label for="summary" class="col-md-4 col-form-label text-md-right">Titulo</label>
 
                                 <div class="col-md-6">
                                     <input id="summary" type="text"
                                         class="form-control @error('summary') is-invalid @enderror" name="summary"
-                                        placeholder="Agregue un título breve." value="{{ old('summary',$complaint->summary ?? '') }}" required
+                                        placeholder="Agregue un título breve."
+                                        value="{{ old('summary', $complaint->summary ?? '') }}" required
                                         autocomplete="summary" autofocus>
 
                                     @error('summary')
@@ -139,12 +144,12 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="description"
-                                    class="col-md-4 col-form-label text-md-right">Descripción</label>
+                                <label for="description" class="col-md-4 col-form-label text-md-right">Descripción</label>
 
                                 <div class="col-md-6">
                                     <textarea id="description" name="description" class="form-control"
-                                        placeholder="Explique a detalle el inconveniente." required>{{ $complaint->description ?? '' }}</textarea>
+                                        placeholder="Explique a detalle el inconveniente."
+                                        required>{{ $complaint->description ?? '' }}</textarea>
 
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -153,15 +158,60 @@
                                     @enderror
                                 </div>
                             </div>
-                           
+                            </fieldset>
+
+                            <div class="form-group row">
+                                <label for="category_id" class="col-md-4 col-form-label text-md-right">Categoría</label>
+
+                                <div class="col-md-6">
+                                    <select id="category_id" name="category_id"
+                                        class="form-control  @error('status') is-invalid @enderror">
+                                        @foreach ($categories->get() as $index => $category)
+                                            <option value="{{ $index }}"
+                                                {{ old('category_id', $complaint->category_id ?? '') == $index ? 'selected' : '' }}>
+                                                {{ $category }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('summary')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="status" class="col-md-4 col-form-label text-md-right">Estado</label>
+
+                                <div class="col-md-6">
+                                    <select id="status" name="status"
+                                        class="form-control  @error('status') is-invalid @enderror">
+                                        @foreach ($statuses->get() as $index => $status)
+                                            <option value="{{ $index }}"
+                                                {{ old('status', $complaint->status ?? '') == $index ? 'selected' : '' }}>
+                                                {{ $status }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('summary')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     @if (isset($complaint) && is_object($complaint))
-                                    <a href="{{ route('complaint.index') }}"
-                                    class="btn btn-outline-secondary">Cancelar</a>
+                                        <a href="{{ route('complaint.index') }}"
+                                            class="btn btn-outline-secondary">Cancelar</a>
                                     @else
-                                    <a href="{{ route('complaint.search') }}"
-                                    class="btn btn-outline-secondary">Cancelar</a>  
+                                        <a href="{{ route('complaint.search') }}"
+                                            class="btn btn-outline-secondary">Cancelar</a>
                                     @endif
                                     <button type="submit" class="btn btn-primary">
                                         Guardar

@@ -11,6 +11,9 @@ class Branch extends Model
 
     protected $table = 'branch';
 
+    protected $primaryKey = 'id';
+    
+    protected $fillable = ['name','address','directorate_id','status'];
     //one to many (inverse)
     public function directorate()
     {
@@ -21,5 +24,11 @@ class Branch extends Model
     public function complaints()
     {
         return $this->hasMany(Complaint::class);
+    }
+
+    //one to many
+    public function users()
+    {
+        return $this->hasMany(User::class);
     }
 }

@@ -17,8 +17,5 @@ class Vendors {
 
     return $vendorsArray;
   }
-
-
-
   
 }

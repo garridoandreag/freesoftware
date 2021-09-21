@@ -42,7 +42,7 @@
 
                             <div class="form-group row mb-3">
                                 <div class="col-md-6 offset-md-3">
-                                    <a href="#" class="btn btn-success btn-lg btn-block "><i class="bi bi-plus-circle"></i> Crear Queja</a>
+                                    <a href="{{ route('complaint.create') }}" class="btn btn-success btn-lg btn-block "><i class="bi bi-plus-circle"></i> Crear Queja</a>
                                 </div>
                             </div>
                         </form>

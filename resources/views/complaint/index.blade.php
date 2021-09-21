@@ -27,34 +27,34 @@
                         <table id="example" class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Título</th>
-                                    <th>Proveedor</th>
-                                    <th>Departamento</th>
-                                    <th>Municipio</th>
-                                    <th>Sucursal</th>
-                                    <th>Estado</th>
+                                    <th scope="col">Título</th>
+                                    <th scope="col">Proveedor</th>
+                                    <th scope="col">Departamento</th>
+                                    <th scope="col">Municipio</th>
+                                    <th scope="col">Sucursal</th>
+                                    <th scope="col">Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($complaints as $complaint)
                                     <tr>
-                                        <td><a href="{{ route('complaint.detail', ['id' => $complaint->id]) }}">
+                                        <td data-label="Título"><a href="{{ route('complaint.detail', ['id' => $complaint->id]) }}">
                                                 {{ $complaint->summary }}
                                             </a>
                                         </td>
-                                        <td><a href="{{ route('complaint.detail', ['id' => $complaint->id]) }}">
+                                        <td data-label="Proveedor"><a href="{{ route('complaint.detail', ['id' => $complaint->id]) }}">
                                                 {{ $complaint->vendor->name }}
                                             </a></td>
-                                        <td><a href="{{ route('complaint.detail', ['id' => $complaint->id]) }}">
+                                        <td data-label="Departamento"><a href="{{ route('complaint.detail', ['id' => $complaint->id]) }}">
                                                 {{ $complaint->department->name }}
                                             </a></td>
-                                        <td><a href="{{ route('complaint.detail', ['id' => $complaint->id]) }}">
+                                        <td data-label="Municipio"><a href="{{ route('complaint.detail', ['id' => $complaint->id]) }}">
                                                 {{ $complaint->town->name }}
                                             </a></td>
-                                        <td><a href="{{ route('complaint.detail', ['id' => $complaint->id]) }}">
+                                        <td data-label="Sucursal"><a href="{{ route('complaint.detail', ['id' => $complaint->id]) }}">
                                                 {{ $complaint->branchoffice->address }}
                                             </a></td>
-                                        <td>
+                                        <td data-label="Estado">
                                             @if ($complaint->status == 0)
                                                 <span id="status{{ $complaint->id }}" class="status badge badge-pill badge-danger">
                                                     INACTIVO
