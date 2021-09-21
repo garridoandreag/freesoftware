@@ -61,7 +61,7 @@ class ComplaintController extends Controller
 
         $code = collect(DB::select('SELECT getComplaintCode(?,?,?) AS code', [$data['department_id'],$data['town_id'],$nowTimeDate]))->first()->code;
 
-        Complaint::create([
+        $complaint = Complaint::create([
             'summary'=> $data['summary'],
             'description'=> $data['description'],
             'anonymous' => 1,
@@ -73,8 +73,9 @@ class ComplaintController extends Controller
             'code' => $code,
         ]);
 
-        return redirect()->route('complaint.search')
-                    ->with(['status' => 'Queja registrada con éxito!']);
+        return view('complaint.detail', [
+            'complaint' => $complaint
+        ]);
     }
 
     /**

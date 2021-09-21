@@ -87,6 +87,12 @@ Route::prefix('stadistic')->group(function () {
     Route::get('/getComplaintsByCategory/{vendor_id?}', [App\Http\Controllers\StadisticController::class, 'getComplaintsByCategory'])->name('stadistic.getComplaintsByCategory');
 });
 
+Route::prefix('report')->group(function () {
+    Route::get('/complaint/{id}',[App\Http\Controllers\ReportController::class,'getComplaintPDF'])->name('report.complaint');
+    
+});
+
+
 Route::prefix('category')->group(function () {
     Route::get('/', [App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
     Route::get('/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('category.create');
