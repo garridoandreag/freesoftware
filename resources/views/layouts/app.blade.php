@@ -73,18 +73,15 @@
                                     <a class="nav-link" href="{{ route('login') }}" style="color: white">Iniciar sesión</a>
                                 </li>
                             @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}" style="color: white">Registrar</a>
-                                </li>
-                            @endif
                         @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: white">
                                 <i class="bi bi-bar-chart-line"></i> Gráficas
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('stadistic.chart4') }}" >
+                                    General
+                                </a>
                                 <a class="dropdown-item" href="{{ route('stadistic.chart1') }}" >
                                     Quejas por departamento
                                 </a>
@@ -97,7 +94,13 @@
                             </div>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('report.index') }}" style="color: white"><i class="bi bi-file-earmark-text"></i> Reportería</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('complaint.index') }}" style="color: white"><i class="bi bi-megaphone"></i> Quejas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.index') }}" style="color: white"><i class="bi bi-tags"></i> Categorías</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.index') }}" style="color: white"><i class="bi bi-people"></i> Usuarios</a>

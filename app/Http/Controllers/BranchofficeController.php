@@ -44,8 +44,8 @@ class BranchofficeController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:80'],
-            'addnit' => ['nullable', 'int', 'max:1'],
-            'nit' => ['nullable', 'string', 'max:8'],
+            'addnit' => ['nullable'],
+            'nit' => ['nullable', 'max:8'],
             'zone' => ['nullable', 'string', 'max:2'],
             'address' => ['required', 'string', 'max:255'],
             'vendor_id' => ['required'],
@@ -114,7 +114,7 @@ class BranchofficeController extends Controller
 
         $data = $request->validate([
             'name' => ['required', 'string', 'max:80'],
-            'addnit' => ['nullable', 'int', 'max:1'],
+            'addnit' => ['nullable'],
             'nit' => ['nullable', 'string', 'max:8'],
             'zone' => ['nullable', 'string', 'max:2'],
             'address' => ['required', 'string', 'max:255'],

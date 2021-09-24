@@ -67,11 +67,15 @@ SELECT region.name region
 ,complaint.town_id town_id
 ,vendor.name vendor
 ,complaint.vendor_id vendor_id
+,branchoffice.address name
+,branchoffice.address address
+,complaint.branchoffice_id branchoffice_id 
 ,complaint.id id
 ,complaint.code codigo
 ,complaint.summary summary
 ,complaint.description description
-,complaint.created_at fecha
+,complaint.created_at created
+,(SELECT CONVERT_TZ(complaint.created_at,'+00:00','-06:00')) createdTZ
 ,category.name category
 ,complaint.category_id category_id
 ,complaint.status status
@@ -81,7 +85,11 @@ INNER JOIN vendor ON complaint.vendor_id = vendor.id
 INNER JOIN town ON complaint.town_id = town.id
 INNER JOIN region ON department.region_id = region.id
 INNER JOIN category ON complaint.category_id = category.id
+INNER JOIN branchoffice ON complaint.branchoffice_id = branchoffice.id
 )
 
 
 `freesoftwaredb`.`getComplaintCode`(<{pdepartmend_id INT}>, <{ptown_id INT}>, <{pcreated_at TIMESTAMP}>)
+
+
+mysqldump -u root -p fresoftware > data-dump.sql

@@ -53,7 +53,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -62,9 +62,13 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function detail($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('user.detail', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -73,9 +77,13 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('user.register', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -128,6 +136,41 @@ class UserController extends Controller
 
     }
 
+    public function updateByAdmin(Request $request){
+   
+        try{
+            $id = $request->input('id');
+            $user = User::where('id', $id)->first();
+    
+            $validate = $this->validate($request, [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string','email','max:255', 'unique:users,email,'.$id], 
+                'role_id' => ['required'],
+                'branch_id' => ['required'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                ]);
+    
+            //RECOGER LOS DATOS DEL FORMULARIO
+            $name = $request->input('name');
+            $email = $request->input('email');
+            $role_id = $request->input('role_id');
+            $password = $request->input('password');
+    
+            //ASIGNAR VALORES AL OBJETO DEL USUARIO
+            $user->name = $name;
+            $user->email = $email;
+            $user->role_id = $role_id;
+            $user->password = Hash::make( $password );
+    
+            //ejecutar consulta y cambios en la base de datos
+            $user->update();
+        }catch(\Exception $e){
+            return redirect()->route('user.index')->with('warning', 'El usuario no se pudo actualizar. Error '.$e);
+    
+        }
+            return redirect()->route('user.index')->with('status', 'Usuario actualizado correctamente');
+    }
+
     public function getImage($filename){
         $file = Storage::disk('users')->get($filename);
         return new Response($file,200);
@@ -139,8 +182,17 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        //
+        try{
+            User::where('id', '=', $id)->delete();
+
+        }catch(\Exception $e){
+            return redirect()->route('user.index')
+            ->with(['warning' => 'No se pudo eliminar el registro, porque ya existen movimientos.']);
+        }
+
+        return redirect()->route('user.index')
+        ->with(['status' => 'Se elimino el registro.']);
     }
 }

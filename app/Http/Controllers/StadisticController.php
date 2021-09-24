@@ -9,6 +9,11 @@ use App\Models\{Branchoffice, Town, Department, Vendor};
 
 class StadisticController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function chart1()
     {
       $vendors = Vendor::get()->where('status',1)->pluck('name','id');
@@ -30,6 +35,14 @@ class StadisticController extends Controller
       $vendors = Vendor::get()->where('status',1)->pluck('name','id');
 
         return view('stadistic.chart3',compact('vendors'));
+
+    }
+
+    public function chart4()
+    {
+      $vendors = Vendor::get()->where('status',1)->pluck('name','id');
+
+        return view('stadistic.chart4',compact('vendors'));
 
     }
 

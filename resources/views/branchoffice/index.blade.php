@@ -12,11 +12,13 @@
                     </h5>
                     <div class="card-body">
 
+                        @auth
                         <div class="row justify-content-md-center">
                             <div class="col">
                                 <a href="{{ route('branchoffice.create') }}" class="btn btn-success"><i class="bi bi-plus-circle"></i> Crear Sucursal</a>
                             </div>
                         </div>
+                        @endauth
                         <br>
 
                         @if (session('status'))

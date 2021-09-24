@@ -12,11 +12,13 @@
                     </h5>
                     <div class="card-body">
 
+                        @auth
                         <div class="row justify-content-md-center">
                             <div class="col">
                                 <a href="{{ route('vendor.create') }}" class="btn btn-success"><i class="bi bi-plus-circle"></i> Crear Proveedor </a>
                             </div>
                         </div>
+                        @endauth
                         <br>
 
                         @if (session('status'))
@@ -30,31 +32,31 @@
                             </div>
                         @endif
 
-                        <table id="example" class="table table-hover " style="width:100%">
+                        <table id="example" class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Nombre Comercial</th>
-                                    <th>Razón Social</th>
-                                    <th>Nit</th>
-                                    <th>Estado</th>
+                                    <th scope="col">Nombre Comercial</th>
+                                    <th scope="col">Razón Social</th>
+                                    <th scope="col">Nit</th>
+                                    <th scope="col">Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($vendors as $vendor)
                                     <tr>
-                                        <td><a href="{{ route('vendor.detail', ['id' => $vendor->id]) }}">
+                                        <td data-label="Nombre Comercial"><a href="{{ route('vendor.detail', ['id' => $vendor->id]) }}">
                                                 {{ $vendor->name }}
                                             </a>
                                         </td>
-                                        <td><a href="{{ route('vendor.detail', ['id' => $vendor->id]) }}">
+                                        <td data-label="Razón Social"><a href="{{ route('vendor.detail', ['id' => $vendor->id]) }}">
                                                 {{ $vendor->registeredname }}
                                             </a>
                                         </td>
-                                        <td><a href="{{ route('vendor.detail', ['id' => $vendor->id]) }}">
+                                        <td data-label="Nit"><a href="{{ route('vendor.detail', ['id' => $vendor->id]) }}">
                                                 {{ $vendor->nit }}
                                             </a>
                                         </td>
-                                        <td>
+                                        <td data-label="Estado">
                                             @if ($vendor->status == 0)
                                                 <span id="status{{ $vendor->id }}"
                                                     class="status badge badge-pill badge-danger">

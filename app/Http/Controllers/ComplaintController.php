@@ -73,9 +73,7 @@ class ComplaintController extends Controller
             'code' => $code,
         ]);
 
-        return view('complaint.detail', [
-            'complaint' => $complaint
-        ]);
+        return redirect()->route('complaint.showprint', ['id' => $complaint->id]);
     }
 
     /**
@@ -94,7 +92,16 @@ class ComplaintController extends Controller
     {
         $complaint = Complaint::where('code',$request->code)->first();
 
-        return view('complaint.detail', [
+        return view('complaint.show', [
+            'complaint' => $complaint
+        ]);
+    }
+
+    public function showprint($id)
+    {
+        $complaint = Complaint::find($id);
+
+        return view('complaint.show', [
             'complaint' => $complaint
         ]);
     }
