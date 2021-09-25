@@ -95,7 +95,7 @@ Route::prefix('stadistic')->group(function () {
 
 Route::prefix('report')->group(function () {
     Route::get('/',[App\Http\Controllers\ReportController::class,'index'])->name('report.index')->middleware('auth');
-    Route::get('/complaint/{id}',[App\Http\Controllers\ReportController::class,'getComplaintPDF'])->name('report.complaint')->middleware('auth');
+    Route::get('/complaint/{id}',[App\Http\Controllers\ReportController::class,'getComplaintPDF'])->name('report.complaint');
     Route::post('/complaintsByDate',[App\Http\Controllers\ReportController::class,'getComplaintsByDatePDF'])->name('report.complaintsByDate')->middleware('auth');
     Route::post('/complaintsByDateRegion',[App\Http\Controllers\ReportController::class,'getComplaintsByDateRegionPDF'])->name('report.complaintsByDateRegion')->middleware('auth');
     Route::post('/complaintsByDateDepartment',[App\Http\Controllers\ReportController::class,'getComplaintsByDateDepartmentPDF'])->name('report.complaintsByDateDepartment')->middleware('auth');

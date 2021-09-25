@@ -7,7 +7,7 @@ class Departments {
 
   public function get(){
 
-    $departments = Department::get()->where('status',1);
+    $departments = Department::get()->where('status',1)->sortBy('name');
 
     foreach($departments as $department){
 

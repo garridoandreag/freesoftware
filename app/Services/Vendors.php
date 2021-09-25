@@ -7,7 +7,7 @@ class Vendors {
 
   public function get(){
 
-    $vendors = Vendor::get()->where('status',1);
+    $vendors = Vendor::get()->where('status',1)->sortBy('name');
 
     foreach($vendors as $vendor){
 

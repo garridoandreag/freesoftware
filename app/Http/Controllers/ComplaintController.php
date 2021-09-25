@@ -30,7 +30,7 @@ class ComplaintController extends Controller
      */
     public function create()
     {
-        $vendors = Vendor::get()->where('status',1)->pluck('name','id');
+        $vendors = Vendor::get()->where('status',1)->sortBy('name')->pluck('name','id');
 
         return view('complaint.create',compact('vendors'));
     }

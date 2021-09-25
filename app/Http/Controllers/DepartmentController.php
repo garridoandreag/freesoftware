@@ -86,7 +86,9 @@ class DepartmentController extends Controller
     public function get($id){
         $departments = Department::join('town', 'department.id', '=','town.department_id')
         ->join('branchoffice', 'town.id', '=','branchoffice.town_id')
-        ->where('branchoffice.vendor_id',$id)->pluck('department.name','department.id');
+        ->where('branchoffice.vendor_id',$id)
+        ->orderBy('department.name','asc')
+        ->pluck('department.name','department.id');
 
         return json_encode($departments);
 

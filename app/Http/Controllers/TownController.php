@@ -89,9 +89,10 @@ class TownController extends Controller
             $towns = Town::join('branchoffice', 'town.id', '=','branchoffice.town_id')
             ->where('branchoffice.vendor_id',$vendor_id)
             ->where('town.department_id',$department_id)
+            ->sortBy('town.name','asc')
             ->pluck('town.name','town.id');
         }else{
-            $towns = Town::where('town.department_id',$department_id)
+            $towns = Town::where('town.department_id',$department_id)->orderBy('town.name','asc')
             ->pluck('town.name','town.id');
         }
 

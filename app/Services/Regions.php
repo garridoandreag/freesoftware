@@ -7,7 +7,7 @@ class Regions {
 
   public function get(){
 
-    $regions = Region::get()->where('status',1);
+    $regions = Region::get()->where('status',1)->sortBy('name');
 
     foreach($regions as $region){
 

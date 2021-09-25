@@ -7,7 +7,7 @@ class Branches {
 
   public function get(){
 
-    $branches = Branch::get()->where('status',1);
+    $branches = Branch::get()->where('status',1)->sortBy('name');
 
     foreach($branches as $branch){
 
