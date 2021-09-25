@@ -14,7 +14,7 @@ class CreateStadisticView extends Migration
     public function up()
     {
         DB::statement("
-        create VIEW complaintview AS(
+        CREATE VIEW complaintview AS(
             SELECT region.name region
             ,region.id region_id
             ,department.name department
@@ -23,18 +23,27 @@ class CreateStadisticView extends Migration
             ,complaint.town_id town_id
             ,vendor.name vendor
             ,complaint.vendor_id vendor_id
-            ,complaint.code codigo
+            ,branchoffice.name branchoffice
+            ,branchoffice.zone zone
+            ,branchoffice.address address
+            ,complaint.branchoffice_id branchoffice_id 
+            ,complaint.id id
+            ,complaint.code code
             ,complaint.summary summary
             ,complaint.description description
-            ,complaint.created_at fecha
+            ,complaint.created_at created
+            ,date((SELECT CONVERT_TZ(complaint.created_at,'+00:00','-06:00'))) createdTZ
             ,category.name category
+            ,complaint.category_id category_id
             ,complaint.status status
             FROM complaint 
             INNER JOIN department ON complaint.department_id = department.id
             INNER JOIN vendor ON complaint.vendor_id = vendor.id
             INNER JOIN town ON complaint.town_id = town.id
             INNER JOIN region ON department.region_id = region.id
-            INNER JOIN category ON complaint.category_id = category.id);");
+            INNER JOIN category ON complaint.category_id = category.id
+            INNER JOIN branchoffice ON complaint.branchoffice_id = branchoffice.id
+        );");
     }
 
     /**
@@ -44,6 +53,6 @@ class CreateStadisticView extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stadistic_view');
+        Schema::dropIfExists('complaintview');
     }
 }

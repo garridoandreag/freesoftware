@@ -17,6 +17,7 @@ class CreateDepartmentTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('name');
+            $table->string('code',10);
             $table->boolean('status')->default(1);
             $table->foreignId('region_id');
             $table->foreign('region_id')->references('id')->on('region');

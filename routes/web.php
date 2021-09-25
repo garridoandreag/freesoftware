@@ -99,6 +99,9 @@ Route::prefix('report')->group(function () {
     Route::post('/complaintsByDate',[App\Http\Controllers\ReportController::class,'getComplaintsByDatePDF'])->name('report.complaintsByDate')->middleware('auth');
     Route::post('/complaintsByDateRegion',[App\Http\Controllers\ReportController::class,'getComplaintsByDateRegionPDF'])->name('report.complaintsByDateRegion')->middleware('auth');
     Route::post('/complaintsByDateDepartment',[App\Http\Controllers\ReportController::class,'getComplaintsByDateDepartmentPDF'])->name('report.complaintsByDateDepartment')->middleware('auth');
+    Route::post('/complaintsByDateCategory',[App\Http\Controllers\ReportController::class,'getComplaintsByDateCategoryPDF'])->name('report.complaintsByDateCategory')->middleware('auth');
+    Route::post('/complaintsByDateRegionAndVendor',[App\Http\Controllers\ReportController::class,'getComplaintsByDateRegionAndVendorPDF'])->name('report.complaintsByDateRegionAndVendor')->middleware('auth');
+    
 });
 
 

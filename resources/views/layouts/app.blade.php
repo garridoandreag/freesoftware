@@ -100,7 +100,7 @@
                             <a class="nav-link" href="{{ route('complaint.index') }}" style="color: white"><i class="bi bi-megaphone"></i> Quejas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.index') }}" style="color: white"><i class="bi bi-tags"></i> Categorías</a>
+                            <a class="nav-link" href="{{ route('category.index') }}" style="color: white"><i class="bi bi-tags"></i> Categorías</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.index') }}" style="color: white"><i class="bi bi-people"></i> Usuarios</a>

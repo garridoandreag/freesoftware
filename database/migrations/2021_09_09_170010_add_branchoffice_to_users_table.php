@@ -13,7 +13,7 @@ class AddBranchofficeToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('user', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->foreignId('branch_id');
             $table->foreign('branch_id')->references('id')->on('branch');
         });

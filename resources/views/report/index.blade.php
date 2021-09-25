@@ -175,7 +175,114 @@
                                         </td>
                                     </form>
                                 </tr>
-                                
+                                <tr>
+                                    <form id="categoryForm" method="POST"
+                                        action="{{ route('report.complaintsByDateCategory') }}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <td colspan="2">
+                                            Quejas emitidas en un rango de fechas por Categoría
+                                        </td>
+                                        <td colspan="2">
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">De</span>
+                                                </div>
+                                                <input id="startDate" type="date"
+                                                    class="form-control @error('startDate') is-invalid @enderror"
+                                                    name="startDate" autocomplete="startDate" autofocus>
+                                            </div>
+                                            <br>
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Hasta</span>
+                                                </div>
+                                                <input id="endDate" type="date"
+                                                    class="form-control @error('endDate') is-invalid @enderror"
+                                                    name="endDate" autocomplete="endDate" autofocus>
+                                            </div>
+
+                                        </td>
+                                        <td colspan="2">
+                                            <div class="mb-3">
+                                                <div class="input-group is-invalid">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="category">Categoría</label>
+                                                    </div>
+                                                    <select multiple="multiple" class="form-control" id="category_id[]"
+                                                        name="category_id[]">
+                                                        @foreach ($categories as $index => $category)
+                                                            <option value="{{ $index }}">
+                                                                {{ $category }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td scope="row">
+                                            <center>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="bi bi-printer"></i>
+                                                </button>
+                                            </center>
+                                        </td>
+                                    </form>
+                                </tr>
+                                <tr>
+                                    <form id="quantityRegionForm" method="POST"
+                                        action="{{ route('report.complaintsByDateRegionAndVendor') }}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <td colspan="2">
+                                            Conteo de quejas por region, proveedor y sucursal
+                                        </td>
+                                        <td colspan="2">
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">De</span>
+                                                </div>
+                                                <input id="startDate" type="date"
+                                                    class="form-control @error('startDate') is-invalid @enderror"
+                                                    name="startDate" autocomplete="startDate" autofocus>
+                                            </div>
+                                            <br>
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Hasta</span>
+                                                </div>
+                                                <input id="endDate" type="date"
+                                                    class="form-control @error('endDate') is-invalid @enderror"
+                                                    name="endDate" autocomplete="endDate" autofocus>
+                                            </div>
+
+                                        </td>
+                                        <td colspan="2">
+                                            <div class="mb-3">
+                                                <div class="input-group is-invalid">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="vendor">Proveedor</label>
+                                                    </div>
+                                                    <select class="form-control" id="vendor_id"
+                                                        name="vendor_id">
+                                                        @foreach ($vendors as $index => $vendor)
+                                                            <option value="{{ $index }}">
+                                                                {{ $vendor }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td scope="row">
+                                            <center>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="bi bi-printer"></i>
+                                                </button>
+                                            </center>
+                                        </td>
+                                    </form>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

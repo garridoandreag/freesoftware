@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Complaint, Region, Department};
+use App\Models\{Complaint, Region, Department, Category, Vendor};
 use DB;
 use Carbon\Carbon;
 
@@ -14,7 +14,11 @@ class ReportController extends Controller
 
         $departments = Department::where('status',1)->orderBy('name','asc')->pluck('name','id');
 
-        return view('report.index', compact('regions','departments'));
+        $categories = Category::where('status',1)->orderBy('name','asc')->pluck('name','id');
+
+        $vendors = Vendor::where('status',1)->orderBy('name','asc')->pluck('name','id');
+
+        return view('report.index', compact('regions','departments','categories','vendors'));
     }
 
     public function getComplaintPDF($id)
@@ -123,9 +127,6 @@ class ReportController extends Controller
         ]);
 
         $categories = $request->input('category_id');
-
-        //var_dump($request->input('region_id'));
-        //die();
         $quantityCategories = count(array($request->input('category_id')));
 
         $complaints = DB::table('complaintview')
@@ -145,6 +146,34 @@ class ReportController extends Controller
         return $pdf->download('QuejasPorCategoria-'.$startDate.'-A-'.$endDate.'.pdf');
 
     }
+
+    
+    public function getComplaintsByDateRegionAndVendorPDF(Request $request){
+      
+        $data = $request->validate([
+            'startDate' => ['required', 'date'],
+            'endDate' => ['required', 'date'],
+            'vendor_id' => ['required']
+        ]);
+
+        $vendor_id = $data['vendor_id'];
+
+        $complaints = DB::table('complaintview')
+        ->select(DB::raw('branchoffice,region, count(complaintview.id) as quantity'))
+        ->where('vendor_id',$vendor_id)
+        ->where('createdTZ','>=',$data['startDate'])
+        ->where('createdTZ','<=',$data['endDate'])
+        ->groupBy('region','branchoffice')
+        ->get();
+        
+        $now = Carbon::now();
+        $startDate = $data['startDate'];
+        $endDate = $data['endDate'];
+
+        $pdf = \PDF::loadView('/report/complaintsByRegion',compact('complaints','now','startDate','endDate'))->setPaper('a4', 'landscape');
+
+        return $pdf->download('CantQuejasPorRegion-'.$startDate.'-A-'.$endDate.'.pdf');
+      }
 
 
 }
